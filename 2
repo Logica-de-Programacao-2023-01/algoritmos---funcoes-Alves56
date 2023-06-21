@@ -1,0 +1,24 @@
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func main() {
+	str := "Hello, World!"
+	vowelCount := countVowels(str)
+	fmt.Printf("Quantidade de vogais: %d\n", vowelCount)
+}
+
+func countVowels(str string) int {
+	vowels := []string{"a", "e", "i", "o", "u"}
+	lowercaseStr := strings.ToLower(str)
+	vowelCount := 0
+
+	for _, vowel := range vowels {
+		vowelCount += strings.Count(lowercaseStr, vowel)
+	}
+
+	return vowelCount
+}
