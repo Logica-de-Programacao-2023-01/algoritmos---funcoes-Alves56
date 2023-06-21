@@ -1,0 +1,45 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"math"
+)
+
+func main() {
+	number := 17
+	isPrime, err := isPrimeNumber(number)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Printf("%d é um número primo? %v\n", number, isPrime)
+	}
+
+	negativeNumber := -5
+	isPrime, err = isPrimeNumber(negativeNumber)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Printf("%d é um número primo? %v\n", negativeNumber, isPrime)
+	}
+}
+
+func isPrimeNumber(number int) (bool, error) {
+	if number < 0 {
+		return false, errors.New("o número é negativo")
+	}
+
+	if number < 2 {
+		return false, nil
+	}
+
+	squareRoot := int(math.Sqrt(float64(number)))
+
+	for i := 2; i <= squareRoot; i++ {
+		if number%i == 0 {
+			return false, nil
+		}
+	}
+
+	return true, nil
+}
