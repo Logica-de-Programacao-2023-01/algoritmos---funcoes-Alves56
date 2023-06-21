@@ -1,0 +1,20 @@
+package main
+
+import "fmt"
+
+func main() {
+	numbers := []int{10, 20, 30, 40, 50}
+	average := calculateAverage(numbers)
+	fmt.Printf("Média: %.2f\n", average)
+}
+
+func calculateAverage(numbers []int) float64 {
+	sum := 0
+
+	for _, num := range numbers {
+		sum += num
+	}
+
+	average := float64(sum) / float64(len(numbers))
+	return average
+}
