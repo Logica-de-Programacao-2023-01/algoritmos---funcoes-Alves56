@@ -1,0 +1,41 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+type IntOperation func(int) int
+
+func main() {
+	numbers := []int{1, 2, 3, 4, 5}
+	squareFunc := func(num int) int {
+		return num * num
+	}
+
+	squaredNumbers, err := applyFunction(numbers, squareFunc)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Números ao quadrado:", squaredNumbers)
+	}
+
+	emptySlice := []int{}
+	squaredNumbers, err = applyFunction(emptySlice, squareFunc)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Números ao quadrado:", squaredNumbers)
+	}
+}
+
+func applyFunction(numbers []int, fn IntOperation) ([]int, error) {
+	if len(numbers) == 0 {
+		return nil, errors.New("o slice está vazio")
+	}
+	result := make([]int, len(numbers))
+	for i, num := range numbers {
+		result[i] = fn(num)
+	}
+	return result, nil
+}
