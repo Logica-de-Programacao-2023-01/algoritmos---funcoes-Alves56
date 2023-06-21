@@ -1,0 +1,33 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"strings"
+)
+
+func main() {
+	strings := []string{"Olá", "mundo", "Go"}
+	concatenated, err := concatenateWithComma(strings)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Strings concatenadas:", concatenated)
+	}
+
+	emptySlice := []string{}
+	concatenated, err = concatenateWithComma(emptySlice)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Strings concatenadas:", concatenated)
+	}
+}
+
+func concatenateWithComma(strings []string) (string, error) {
+	if len(strings) == 0 {
+		return "", errors.New("o slice está vazio")
+	}
+	concatenated := strings.Join(strings, ",")
+	return concatenated, nil
+}
