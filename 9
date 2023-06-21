@@ -1,0 +1,36 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"strings"
+)
+
+func main() {
+	text := "Olá, mundo! Bem-vindo ao ChatGPT."
+
+	words, err := extractWords(text)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Palavras:", words)
+	}
+
+	emptyText := ""
+	words, err = extractWords(emptyText)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Palavras:", words)
+	}
+}
+
+func extractWords(text string) ([]string, error) {
+	if text == "" {
+		return nil, errors.New("a string está vazia")
+	}
+
+	words := strings.Fields(text)
+
+	return words, nil
+}
