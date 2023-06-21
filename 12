@@ -1,0 +1,42 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"strings"
+	"unicode"
+)
+
+func main() {
+	strSlice := []string{"Gato", "Cachorro", "Elefante", "leão", "Macaco"}
+	filteredStr, err := filterStrings(strSlice)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Strings filtradas:", filteredStr)
+	}
+
+	emptySlice := []string{}
+	filteredStr, err = filterStrings(emptySlice)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Strings filtradas:", filteredStr)
+	}
+}
+
+func filterStrings(strs []string) (string, error) {
+	if len(strs) == 0 {
+		return "", errors.New("o slice está vazio")
+	}
+
+	var filtered []string
+
+	for _, str := range strs {
+		if len(str) > 0 && unicode.IsUpper(rune(str[0])) {
+			filtered = append(filtered, str)
+		}
+	}
+
+	return strings.Join(filtered, ", "), nil
+}
