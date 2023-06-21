@@ -1,0 +1,39 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func main() {
+	num := 12345
+	sum, err := sumDigits(num)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Soma dos dígitos:", sum)
+	}
+
+	negativeNum := -987
+	sum, err = sumDigits(negativeNum)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Soma dos dígitos:", sum)
+	}
+}
+
+func sumDigits(num int) (int, error) {
+	if num < 0 {
+		return 0, errors.New("o número é negativo")
+	}
+
+	sum := 0
+	for num > 0 {
+		digit := num % 10
+		sum += digit
+		num /= 10
+	}
+
+	return sum, nil
+}
