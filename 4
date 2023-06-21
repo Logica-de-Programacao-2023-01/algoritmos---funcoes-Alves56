@@ -1,0 +1,22 @@
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+	numbers := []int{10, 5, 8, 3, 15}
+	secondLargest := findSecondLargest(numbers)
+	fmt.Println("Segundo maior valor:", secondLargest)
+}
+
+func findSecondLargest(numbers []int) int {
+	// Ordena o slice em ordem decrescente
+	sort.Slice(numbers, func(i, j int) bool {
+		return numbers[i] > numbers[j]
+	})
+
+	// Retorna o segundo valor do slice (índice 1)
+	return numbers[1]
+}
