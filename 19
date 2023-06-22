@@ -1,0 +1,53 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"math"
+)
+
+func main() {
+	primeNumbers, err := getPrimeNumbers(20)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Números primos:", primeNumbers)
+	}
+
+	primeNumbers, err = getPrimeNumbers(-5)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Números primos:", primeNumbers)
+	}
+}
+
+func getPrimeNumbers(n int) ([]int, error) {
+	if n < 0 {
+		return nil, errors.New("o número não pode ser negativo")
+	}
+
+	primeNumbers := []int{}
+	for i := 2; i <= n; i++ {
+		if isPrime(i) {
+			primeNumbers = append(primeNumbers, i)
+		}
+	}
+
+	return primeNumbers, nil
+}
+
+func isPrime(n int) bool {
+	if n <= 1 {
+		return false
+	}
+
+	sqrt := int(math.Sqrt(float64(n)))
+	for i := 2; i <= sqrt; i++ {
+		if n%i == 0 {
+			return false
+		}
+	}
+
+	return true
+}
