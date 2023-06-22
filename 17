@@ -1,0 +1,37 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"sort"
+	"strings"
+)
+
+func main() {
+	strings := []string{"banana", "laranja", "abacaxi", "maçã"}
+	newStr, err := sortStrings(strings)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Nova string:", newStr)
+	}
+
+	emptyStrings := []string{}
+	newStr, err = sortStrings(emptyStrings)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Nova string:", newStr)
+	}
+}
+
+func sortStrings(strings []string) (string, error) {
+	if len(strings) == 0 {
+		return "", errors.New("o slice de strings está vazio")
+	}
+
+	sort.Strings(strings)
+	newStr := strings.Join(strings, " ")
+
+	return newStr, nil
+}
