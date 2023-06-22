@@ -1,0 +1,41 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func main() {
+	numbers := []int{1, 2, 3, 4, 5}
+	sum, err := applyAndSum(numbers, square)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Soma:", sum)
+	}
+
+	emptySlice := []int{}
+	sum, err = applyAndSum(emptySlice, square)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Soma:", sum)
+	}
+}
+
+func square(n int) int {
+	return n * n
+}
+
+func applyAndSum(numbers []int, f func(int) int) (int, error) {
+	if len(numbers) == 0 {
+		return 0, errors.New("o slice de inteiros está vazio")
+	}
+
+	sum := 0
+	for _, num := range numbers {
+		sum += f(num)
+	}
+
+	return sum, nil
+}
