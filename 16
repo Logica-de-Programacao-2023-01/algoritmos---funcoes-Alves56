@@ -1,0 +1,39 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"strings"
+)
+
+func main() {
+	str := "Hello, World!"
+	newStr, err := replaceVowels(str)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Nova string:", newStr)
+	}
+
+	emptyStr := ""
+	newStr, err = replaceVowels(emptyStr)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Nova string:", newStr)
+	}
+}
+
+func replaceVowels(str string) (string, error) {
+	if len(str) == 0 {
+		return "", errors.New("a string está vazia")
+	}
+
+	vowels := []string{"a", "e", "i", "o", "u", "A", "E", "I", "O", "U"}
+
+	for _, vowel := range vowels {
+		str = strings.ReplaceAll(str, vowel, "*")
+	}
+
+	return str, nil
+}
