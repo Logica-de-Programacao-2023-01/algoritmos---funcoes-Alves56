@@ -1,0 +1,40 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func main() {
+	slice := []int{1, 2, 3, 4, 5}
+	num := 3
+
+	found, err := containsNumber(num, slice)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("O número", num, "está presente no slice?", found)
+	}
+
+	emptySlice := []int{}
+	found, err = containsNumber(num, emptySlice)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("O número", num, "está presente no slice?", found)
+	}
+}
+
+func containsNumber(num int, slice []int) (bool, error) {
+	if len(slice) == 0 {
+		return false, errors.New("o slice está vazio")
+	}
+
+	for _, n := range slice {
+		if n == num {
+			return true, nil
+		}
+	}
+
+	return false, nil
+}
