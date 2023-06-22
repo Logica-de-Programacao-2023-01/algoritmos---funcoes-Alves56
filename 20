@@ -1,0 +1,39 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func main() {
+	strings := []string{"abc", "abcdef", "12345", "abcdefg", "hello"}
+	longStrings, err := filterLongStrings(strings)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Strings com mais de 5 caracteres:", longStrings)
+	}
+
+	emptyStrings := []string{}
+	longStrings, err = filterLongStrings(emptyStrings)
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Strings com mais de 5 caracteres:", longStrings)
+	}
+}
+
+func filterLongStrings(strings []string) ([]string, error) {
+	if len(strings) == 0 {
+		return nil, errors.New("o slice está vazio")
+	}
+
+	filteredStrings := []string{}
+	for _, s := range strings {
+		if len(s) > 5 {
+			filteredStrings = append(filteredStrings, s)
+		}
+	}
+
+	return filteredStrings, nil
+}
